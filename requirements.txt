@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+requests
+tqdm
+scikit-learn
+rank_bm25
