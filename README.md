@@ -32,6 +32,8 @@ Install all necessary libraries using pip:
 pip install -r requirements.txt
 ```
 
+This is a **one-time effort**.
+
 ---
 
 ## 2. Data Preparation (Offline Phase)
