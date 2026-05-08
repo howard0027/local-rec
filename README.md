@@ -42,8 +42,11 @@ Before running the application, you must prepare the dataset, fetch movie metada
 
 ### Step 1: Unzip the MovieLens 1M Dataset
 Due to licensing and file size constraints, the raw dataset is not included in this repository.
-`cd data && unzip ml-1m.zip`
-`cd ..`
+```bash
+cd data && unzip ml-1m.zip
+cd ..
+```
+
 
 ### Step 2: Enrich Movie Metadata
 Run this script to connect the raw MovieLens dataset with the TMDB API. It will fetch movie URLs and summaries, saving the output as `movies_enriched.csv`:
