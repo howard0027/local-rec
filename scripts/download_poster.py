@@ -4,8 +4,8 @@ import os
 import concurrent.futures
 
 # Configuration
-CSV_PATH = "../data/processed/movies_enriched.csv"
-SAVE_DIR = "../data/posters"
+CSV_PATH = "./data/processed/movies_enriched.csv"
+SAVE_DIR = "./data/posters"
 MAX_THREADS = 10 # Adjust based on your network speed
 
 def download_image(movie_id, url):

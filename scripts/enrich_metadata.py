@@ -6,8 +6,8 @@ from tqdm import tqdm
 
 
 TMDB_API_KEY = "2d771e7902402ece8d8e483f6e1d639c"
-MOVIES_DAT_PATH = "../data/ml-1m/movies.dat" 
-OUTPUT_PATH = "../data/processed/movies_enriched.csv"
+MOVIES_DAT_PATH = "./data/ml-1m/movies.dat" 
+OUTPUT_PATH = "./data/processed/movies_enriched.csv"
 
 def fetch_tmdb_data(title, year):
     
@@ -69,7 +69,7 @@ def main():
     test_movies['TMDB_ID'] = tmdb_ids
 
     
-    os.makedirs("../data/processed/", exist_ok=True)
+    os.makedirs("./data/processed/", exist_ok=True)
     test_movies.to_csv(OUTPUT_PATH, index=False)
     print(f"✅ Done. File is saved to {OUTPUT_PATH}")
 

@@ -7,8 +7,8 @@ import os
 import time
 
 # --- Configuration ---
-RATINGS_PATH = "../data/ml-1m/ratings.dat"
-OUTPUT_DIR = "../data/processed/"
+RATINGS_PATH = "./data/ml-1m/ratings.dat"
+OUTPUT_DIR = "./data/processed/"
 LATENT_DIM = 50  # Number of latent dimensions (hyperparameter)
 
 def train_svd():
