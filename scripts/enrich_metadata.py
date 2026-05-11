@@ -5,7 +5,29 @@ import time
 from tqdm import tqdm
 
 
-TMDB_API_KEY = "2d771e7902402ece8d8e483f6e1d639c"
+def _load_env_file(env_path=".env"):
+    """Load key=value pairs from a local .env file."""
+    if not os.path.exists(env_path):
+        return
+    with open(env_path, "r", encoding="utf-8") as env_file:
+        for line in env_file:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and key not in os.environ:
+                os.environ[key] = value
+
+
+_load_env_file()
+TMDB_API_KEY = os.getenv("TMDB_API_KEY")
+if not TMDB_API_KEY:
+    raise RuntimeError(
+        "TMDB_API_KEY is not set. Configure it in your environment or .env before running this script."
+    )
+
 MOVIES_DAT_PATH = "./data/ml-1m/movies.dat" 
 OUTPUT_PATH = "./data/processed/movies_enriched.csv"
 

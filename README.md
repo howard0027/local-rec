@@ -36,7 +36,56 @@ This is a **one-time effort**.
 
 ---
 
-## 2. Data Preparation (Offline Phase)
+## 2. TMDB API Key Setup
+
+The metadata enrichment step requires a TMDB API key.
+
+### 2.1 Apply for a TMDB API Key
+1. Create an account at [TMDB](https://www.themoviedb.org/).
+2. Open your account settings and go to the API section.
+3. Request API access and generate a **V3 API key**.
+4. Keep the key private. Do not share it in code, screenshots, or commits.
+
+### 2.2 Configure Your API Key Locally
+
+You can choose one of the following methods.
+
+#### Option A (Recommended): Set environment variable in terminal
+```bash
+# PowerShell
+$env:TMDB_API_KEY="your_tmdb_v3_api_key_here"
+
+# Windows CMD
+set TMDB_API_KEY=your_tmdb_v3_api_key_here
+
+# macOS/Linux
+export TMDB_API_KEY="your_tmdb_v3_api_key_here"
+```
+
+#### Option B: Use a local `.env` file
+Copy `.env.example` to `.env`, then set your key:
+```bash
+TMDB_API_KEY=your_tmdb_v3_api_key_here
+```
+
+The script `scripts/enrich_metadata.py` reads `TMDB_API_KEY` from the environment and falls back to `.env` automatically.
+
+### 2.3 Verify Your Configuration
+Run:
+```bash
+python3 scripts/enrich_metadata.py
+```
+- If the key is configured, the script starts processing movie metadata.
+- If the key is missing, it stops immediately with a `TMDB_API_KEY is not set` error message.
+
+### 2.4 Security and Incident Response
+- Never commit `.env` or real API keys.
+- If a key was exposed before, revoke/regenerate it in TMDB dashboard immediately.
+- If the exposed key was pushed to a remote repo, rotate the key first, then clean git history if needed.
+
+---
+
+## 3. Data Preparation (Offline Phase)
 
 Before running the application, you must prepare the dataset, fetch movie metadata, and train the recommendation model. This is a **one-time effort**.
 
@@ -53,6 +102,7 @@ Run this script to connect the raw MovieLens dataset with the TMDB API. It will 
 ```bash
 python3 scripts/enrich_metadata.py
 ```
+If `TMDB_API_KEY` is missing, the script will fail immediately with setup instructions.
 
 ### Step 3: Download Movie Posters
 To display movie images in the UI, run the poster downloader script. This will use multithreading to download images based on the URLs fetched in the previous step:
@@ -69,7 +119,7 @@ python3 scripts/train_svd.py
 
 ---
 
-## 3. Running the Application (Online Phase)
+## 4. Running the Application (Online Phase)
 
 After the data is prepared and models are trained, you can start the interactive interface.
 
@@ -82,7 +132,7 @@ The system will automatically open a new tab in your web browser at `http://loca
 
 ---
 
-## 4. Running Evaluation Tests
+## 5. Running Evaluation Tests
 
 We provide test scripts to evaluate the accuracy and speed of the system. You can find them in the `tests/` folder.
 
